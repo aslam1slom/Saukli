@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سوّقلي AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: #ffffff;
+}
+
+header {
+    padding: 25px 15px;
+    text-align: center;
+    background: linear-gradient(135deg, #161f38, #153b40);
+    border-bottom: 1px solid #263750;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #b8ff55;
+}
+
+header p {
+    color: #c4cfdb;
+    margin-bottom: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.card {
+    background: #151d30;
+    border: 1px solid #283650;
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #b8ff55;
+    font-size: 21px;
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    color: #e4eaf2;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #35445d;
+    background: #0b1020;
+    color: white;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 12px;
+    background: #b8ff55;
+    color: #101827;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#preview {
+    display: none;
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    margin-top: 15px;
+    border-radius: 12px;
+    background: #0b1020;
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #0b1020;
+    border: 1px solid #b8ff55;
+    line-height: 2;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.note {
+    color: #aab7ca;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    color: #8290a6;
+    padding: 25px;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">سوّقلي AI ✨</div>
+    <p>حوّل منتجاتك إلى أفكار إعلانية جذابة</p>
+</header>
+
+<main class="container">
+
+    <section class="card">
+        <h2>🚀 اصنع إعلانك</h2>
+
+        <label for="photo">1. ارفع صورة المنتج</label>
+        <input
+            type="file"
+            id="photo"
+            accept="image/*"
+        >
+
+        <img id="preview" alt="معاينة صورة المنتج">
+
+        <label for="shop">2. اسم المحل أو العلامة التجارية</label>
+        <input
+            type="text"
+            id="shop"
+            placeholder="مثلاً: متجر الأناقة"
+        >
+
+        <label for="price">3. سعر المنتج (اختياري)</label>
+        <input
+            type="text"
+            id="price"
+            placeholder="مثلاً: 25,000 دينار"
+        >
+
+        <label for="product">4. نوع المنتج</label>
+        <select id="product">
+            <option value="ملابس">ملابس</option>
+            <option value="أحذية">أحذية</option>
+            <option value="عطور">عطور</option>
+            <option value="إكسسوارات">إكسسوارات</option>
+            <option value="مطاعم وأطعمة">مطاعم وأطعمة</option>
+            <option value="منتجات أخرى">منتجات أخرى</option>
+        </select>
+
+        <label for="type">5. شنو تريد تجهّز؟</label>
+        <select id="type">
+            <option value="image">إعلان صورة</option>
+            <option value="reel">فكرة ريلز فيديو</option>
+        </select>
+
+        <button onclick="createAd()">
+            ✨ جهّز إعلاني
+        </button>
+
+        <div id="result"></div>
+
+        <button
+            id="copyButton"
+            onclick="copyAd()"
+            style="display:none"
+        >
+            📋 نسخ النص الإعلاني
+        </button>
+
+    </section>
+
+    <section class="card">
+        <h2>💎 شلون يشتغل سوّقلي؟</h2>
+        <p>📸 ارفع صورة منتجك.</p>
+        <p>🏪 أضف اسم محلك وسعرك إذا تحب.</p>
+        <p>🎨 اختر إعلان صورة أو فكرة ريلز.</p>
+        <p>📣 جهّز نصاً إعلانياً أولياً.</p>
+
+        <p class="note">
+            هذه النسخة تجريبية. إنشاء الصور الجديدة
+            والفيديوهات تلقائياً يحتاج ربط خدمة ذكاء
+            اصطناعي في الخطوة القادمة.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    سوّقلي AI © 2026
+    <br>
+    التسويق صار أسهل ✨
+</footer>
+
+<script>
+const photo = document.getElementById("photo");
+const preview = document.getElementById("preview");
+
+photo.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file) {
+        preview.style.display = "none";
+        preview.removeAttribute("src");
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        alert("حبيبي، اختار ملف صورة صحيح.");
+        this.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+        preview.src = event.target.result;
+        preview.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+});
+
+function createAd() {
+    const shop = document.getElementById("shop").value.trim();
+    const price = document.getElementById("price").value.trim();
+    const product = document.getElementById("product").value;
+    const type = document.getElementById("type").value;
+    const file = photo.files[0];
+
+    if (!file) {
+        alert("ارفع صورة المنتج أولاً.");
+        return;
+    }
+
+    if (!shop) {
+        alert("اكتب اسم المحل أولاً.");
+        return;
+    }
+
+    let ad = "";
+
+    if (type === "image") {
+        ad =
+`🔥 إعلان جديد من ${shop}
+
+✨ اكتشفوا تشكيلتنا المميزة من ${product}!
+
+🛍️ اختاروا اللي يناسب ذوقكم
+${price ? "\
